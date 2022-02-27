@@ -4,7 +4,7 @@ const Footer = () => {
     <div className='flex justify-center pt-4 pb-12'>
       <div className='grid grid-cols-3 gap-7'>
         <a
-          href='https://discordapp.com'
+          href='https://discord.gg/0xdoodlecats'
           target='_blank'
           rel='noopener noreferrer'
           className='flex items-center'
@@ -43,7 +43,7 @@ const Footer = () => {
           </svg>
         </a>
         <a
-          href='https://twitter.com'
+          href='https://twitter.com/0xdoodlecats'
           target='_blank'
           rel='noopener noreferrer'
           className='flex items-center'
