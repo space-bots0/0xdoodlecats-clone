@@ -147,7 +147,9 @@ const CardDetails = () => {
   return (
     <div className='grid grid-cols-1 text-justify gap-5 md:gap-7 max-w-sm'>
       <span className='text-sm md:text-lg leading-5'>
-        Welcome to OxDoodlesCats, an expansion collection of 6,666 unique doodles x cool cats! Enjoy FREE 3 MINT for the first 666 OGs! Max mint per transaction: 10 NFTs.{' '}
+        Welcome to OxDoodlesCats, an expansion collection of 6,666 unique doodles x cool cats!<br /><br />
+        We use ERC721A standard to optimized the minting! Gas fee for 1 mint and 10 mints are the same!<br /><br />
+        Enjoy FREE 3 MINT for the first 666 OGs! Max mint per transaction: 10 NFTs.{' '}
       </span>
       <span className='text-center text-2xl md:text-4xl'><span id='nft-price' /></span>
       <div

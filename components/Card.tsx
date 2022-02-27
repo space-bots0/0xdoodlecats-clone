@@ -1,5 +1,5 @@
 import React from 'react'
-import cat from '@/public/images/cat.png'
+import cat from '@/public/images/300x300.gif'
 import CardTitle from '@/public/images/CardTitle.png'
 import Image from 'next/image'
 import CardDetails from '@/components/CardDetails'
