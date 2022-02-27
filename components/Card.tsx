@@ -15,7 +15,7 @@ const Card = () => {
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 w-full p-10 md:p-16 gap-y-4'>
         <div className='flex justify-center md:justify-start items-center'>
-          <Image src={cat} />
+          <Image src={cat} unoptimized={true} />
         </div>
         <div className='flex justify-center items-center'>
           <CardDetails />
