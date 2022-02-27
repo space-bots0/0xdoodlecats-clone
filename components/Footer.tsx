@@ -24,7 +24,7 @@ const Footer = () => {
         </a>
 
         <a
-          href='https://opensea.io/collection/0xdoodlecat'
+          href='https://opensea.io/collection/0xdoodlecats'
           target='_blank'
           rel='noopener noreferrer'
           className='flex items-center'

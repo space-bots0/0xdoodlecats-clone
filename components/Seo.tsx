@@ -30,7 +30,7 @@ export default function Seo(props: SeoProps) {
 
   return (
     <Head>
-      <title>{meta.title}</title>
+      <title>0xDoodleCats</title>
       <meta name='robots' content={meta.robots} />
       <meta content={meta.description} name='description' />
       <meta property='og:url' content={`${meta.url}${router.asPath}`} />
