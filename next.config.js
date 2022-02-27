@@ -4,5 +4,4 @@ module.exports = withFonts({
   webpack(config, options) {
     return config
   },
-  distDir: 'build',
 })
