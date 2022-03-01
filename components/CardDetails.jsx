@@ -88,7 +88,7 @@ const CardDetails = () => {
       if (error.code == 'UNPREDICTABLE_GAS_LIMIT' && nftCount < 666) {
         document.getElementById('tx-status').textContent = "Warning : Max 3 NFT per OG wallet!"
         document.getElementById('tx-link').textContent = ""
-      } else if (error.code == 'UNPREDICTABLE_GAS_LIMIT') {
+      } else if (error.code == 'INSUFFICIENT_FUNDS') {
         document.getElementById('tx-status').textContent = "Warning : Your Ether balance is lower than the price!"
         document.getElementById('tx-link').textContent = ""
       }
