@@ -33,8 +33,16 @@ const CardDetails = () => {
 
       console.log('Found account', accounts[0])
       setCurrentAccount(accounts[0])
+      let nftCount = await getSupply();
       document.getElementById("connect").style.display = "none";
-      document.getElementById("mint").style.display = "block";
+
+      if (nftCount < 2222) {
+        document.getElementById("mint").style.display = "block";
+        document.getElementById("sold").style.display = "none";
+      } else {
+        document.getElementById("sold").style.display = "block";
+        document.getElementById("mint").style.display = "none";
+      }
     } catch (error) {
       console.log('Error connecting to metamask', error)
     }
@@ -83,8 +91,6 @@ const CardDetails = () => {
       }
     } catch (error) {
       let nftCount = await getSupply();
-      console.log('Error minting character', error.message)
-      console.log(error.code)
       if (error.code == 'UNPREDICTABLE_GAS_LIMIT' && nftCount < 666) {
         document.getElementById('tx-status').textContent = "Warning : Max 3 NFT per OG wallet!"
         document.getElementById('tx-link').textContent = ""
@@ -125,6 +131,7 @@ const CardDetails = () => {
     let nftCount = await getSupply();
     let nftPrice = nftCount < 666 ? 0 : nftCount < 4000 ? 0.0069 : 0.009;
     if (nftPrice === 0) document.getElementById('nft-price').textContent = "FREE MINT";
+    else if (nftCount >= 2222) document.getElementById('nft-price').textContent = "SOLD OUT";
     else document.getElementById('nft-price').textContent = nftPrice.toString() + " ETH";
   }
 
@@ -147,7 +154,7 @@ const CardDetails = () => {
   return (
     <div className='grid grid-cols-1 text-justify gap-5 md:gap-7 max-w-sm'>
       <span className='text-sm md:text-lg leading-5'>
-        Welcome to OxDoodlesCats, an expansion collection of 6,666 unique doodles x cool cats!<br /><br />
+        Welcome to OxDoodlesCats, an expansion collection of 2,222 unique doodles x cool cats!<br /><br />
         FREE 3 MINT for the first 666 OGs! Gas fee for 1 mint and 10 mints are the same!{' '}
       </span>
       <span className='text-center text-2xl md:text-4xl'><span id='nft-price' /></span>
@@ -156,7 +163,7 @@ const CardDetails = () => {
         style={{ border: '1px solid #D3D3D3' }}
       >
         <p>NFT Minted</p>
-        <p><span id='nft-count' />/6666</p>
+        <p><span id='nft-count' />/2222</p>
       </div>
       <div
         className='flex justify-between items-center rounded-lg px-4 text-xs h-14'
@@ -181,6 +188,7 @@ const CardDetails = () => {
             id='amount'
             type='number'
             pattern='[0-9]*'
+            /*
             onChange={(e) => {
               let realNum = 0
               if (e.target.value === '') realNum = 0
@@ -189,6 +197,8 @@ const CardDetails = () => {
               setInputWidth((3 + realNum.toString().length || 1) * 9)
               setQuantity(realNum)
             }}
+            */
+            disabled
           />
           <button
             className='w-9'
@@ -198,8 +208,12 @@ const CardDetails = () => {
               if (nftCount < 666) {
                 if (quantity < 3) setQuantity((prev) => prev + 1)
                 else setQuantity(3)
-              } else if (quantity < 10) setQuantity((prev) => prev + 1)
-              else setQuantity(10)
+              } else if (nftCount + 10 > 2222) {
+                if (nftCount + quantity < 2222) setQuantity((prev) => prev + 1)
+                else return
+              }
+              else if (quantity < 10) setQuantity((prev) => prev + 1)
+              else return
             }}
           >
             +
@@ -221,6 +235,14 @@ const CardDetails = () => {
         style={{ background: '#FFD101', display: 'none' }}
       >
         <p>MINT NFT</p>
+      </button>
+      <button
+        className='flex justify-center items-center rounded-lg text-sm md:text-xl font-normal h-14'
+        id='sold'
+        style={{ background: '#FFD101', display: 'none' }}
+        disabled
+      >
+        <p>SOLD OUT</p>
       </button>
       <span className='text-sm md:text-lg leading-5' id='tx-status'></span>
       <Link href={txLink}><a className='text-sm md:text-lg leading-5' target="_blank" id='tx-link'></a></Link>

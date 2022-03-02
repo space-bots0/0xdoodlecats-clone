@@ -1,8 +1,10 @@
 import Image from 'next/image'
 import { ethers } from 'ethers'
+import NFT from '../artifact.json'
 import Card from '@/components/Card'
 import Footer from '@/components/Footer'
 import { useState, useEffect } from 'react'
+import { nftContractAddress } from '../config.js'
 import Background from '@/public/images/Background.png'
 import BackgroundMobile from '@/public/images/BackgroundMobile.png'
 import BackgroundXL from '@/public/images/BackgroundXL.png'
@@ -13,22 +15,42 @@ const IndexPage = () => {
 
   // Checks if wallet is connected
   const checkIfWalletIsConnected = async () => {
-    const { ethereum } = window
-    if (ethereum) {
-
-    } else {
-
-    }
 
     const accounts = await ethereum.request({ method: 'eth_accounts' })
 
     if (accounts.length !== 0) {
       setCurrentAccount(accounts[0])
+      let nftCount = await getSupply();
       document.getElementById("connect").style.display = "none";
-      document.getElementById("mint").style.display = "block";
-    } else {
 
+      if (nftCount < 2222) {
+        document.getElementById("mint").style.display = "block";
+        document.getElementById("sold").style.display = "none";
+      } else {
+        document.getElementById("sold").style.display = "block";
+        document.getElementById("mint").style.display = "none";
+      }
     }
+  }
+
+  const getSupply = async () => {
+    const { ethereum } = window
+    const provider = new ethers.providers.Web3Provider(ethereum)
+    const signer = provider.getSigner()
+    const nftContract = new ethers.Contract(
+      nftContractAddress,
+      NFT.output.abi,
+      signer
+    )
+
+    let nftCount = nftContract.totalSupply()
+    const getNftCount = async () => {
+      const result = await nftCount;
+      return parseInt(result);
+    }
+
+    var result = await getNftCount();
+    return result;
   }
 
   // Checks if wallet is connected to the correct network
