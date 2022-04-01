@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.26.0",
+    "dotenv": "^16.0.0",
     "ethers": "^5.5.4",
     "next": "latest",
     "next-compose-plugins": "^2.2.1",
